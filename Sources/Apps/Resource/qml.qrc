@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="main.qml">EntryPoint/main.qml</file>
+        <file alias="qtquickcontrols2.conf">EntryPoint/qtquickcontrols2.conf</file>
+        <file alias="smile.png">Face/smile.png</file>
+        <file alias="faceclassifier.xml">Face/faceclassifier.xml</file>
+        <file alias="Todo.qml">Todo/Todo.qml</file>
+    </qresource>
+</RCC>

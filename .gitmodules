@@ -1,0 +1,15 @@
+[submodule "Sources/External/liberpc"]
+	path = Sources/External/liberpc
+	url = https://github.com/EmbeddedRPC/erpc.git
+[submodule "Sources/External/liberpc-app"]
+	path = Sources/External/liberpc-app
+	url = https://github.com/ierturk/erpc-extension.git
+	branch = devel
+[submodule "Sources/External/libzxing-cpp"]
+	path = Sources/External/libzxing-cpp
+	url = https://github.com/nu-book/zxing-cpp.git
+	branch = master
+[submodule "Sources/External/qwc"]
+	path = Sources/External/qwc
+	url = https://github.com/ierturk/qt-wayland-compositor.git
+	branch = devel
