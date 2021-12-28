@@ -1,7 +1,7 @@
 # Qt-QML-AI #
 
 `Qt-QML-AI` is a collection of some experimental works on `AI`, `Image Processing`, `Qt Qml` and `eRPC`. 
-___
+
 ## Associated Repos and Documentations ##
 | No | Repo                                     | Repo URL      | Documentation URL     |
 | :---: | :---                                  | :---:         | :---:                 |
@@ -14,7 +14,7 @@ ___
 | 7     | OpenCV Contrib                        | [Repo][13]    | [Docs][14]            |
 | 8     | ONNXRunTime                           | [Repo][15]    | [Docs][16]            |
 | 10    | VS Code Remote Development            | [Repo][17]    | [Docs][18]            |
-___
+
 ## Credits ##
 * [Qt Todo List][19]
 * [ZXing Cpp Barcode Library][20]
