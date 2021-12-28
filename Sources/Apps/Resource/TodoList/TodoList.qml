@@ -3,7 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls.Universal 2.15
 
-import org.erturk.todo 1.0
+import org.erturk.todolist 1.0
 
 ColumnLayout {
     property bool statusChanged: false
@@ -59,7 +59,7 @@ ColumnLayout {
             //        }
 
             // Example of model implemented in C++
-            model: TodoModel {
+            model: TodoListModel {
                 // After adding this make sure to run qmake from the Build menu
                 // This is a tricky part, because here `todoList` is a constructor variable from main.cpp
                 list: todoList
@@ -79,17 +79,8 @@ ColumnLayout {
                     }
                 }
                 TextField {
-                    id: txtId
-                    text: model.id
-                    width: 10
-                    visible: false
-                    readOnly: true
-
-                }
-                TextField {
                     id: txtDescription
                     text: model.description
-                    readOnly: true
                     onEditingFinished: model.description = text
                     onTextEdited: {
                         statusChanged = true;
@@ -105,12 +96,12 @@ ColumnLayout {
                     Layout.fillWidth: true
                 }
                 TextField {
-                    id: txtBarcode
-                    text: model.barcode
-                    width: 30
-                    visible: true
-                    readOnly: true
+                    id: txtId
+                    text: model.id
+                    width: 40
+                    visible: false
                 }
+
             }
         }
     }

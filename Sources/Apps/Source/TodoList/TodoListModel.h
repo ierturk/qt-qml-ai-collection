@@ -1,23 +1,22 @@
-#ifndef TODOMODEL_H
-#define TODOMODEL_H
+#ifndef TODOLISTMODEL_H
+#define TODOLISTMODEL_H
 
 #include <QAbstractListModel>
 
-#include "todo.h"
+#include "TodoList.h"
 
-class TodoModel : public QAbstractListModel
+class TodoListModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(TodoList *list READ list WRITE setList)
 
 public:
-    explicit TodoModel(QObject *parent = nullptr);
+    explicit TodoListModel(QObject *parent = nullptr);
     /*
      * Roles are defined here
      */
     enum {
         DoneRole = Qt::UserRole,
-        BarcodeRole,
         DescriptionRole,
         IdRole,
         StatusRole
@@ -46,4 +45,4 @@ private:
     TodoList *mList;
 };
 
-#endif // TODOMODEL_H
+#endif // TODOLISTMODEL_H

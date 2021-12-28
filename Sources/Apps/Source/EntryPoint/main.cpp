@@ -15,9 +15,9 @@
 #include "face.h"
 #include "SGDet.h"
 
-#include "todo.h"
-#include "todomodel.h"
-#include "dbhelper.h"
+#include "TodoList.h"
+#include "TodoListModel.h"
+#include "TodoListDBHelper.h"
 
 int main(int argc, char *argv[])
 {
@@ -34,12 +34,12 @@ int main(int argc, char *argv[])
 
 
     //This function registers the C++ model with qml type system
-    qmlRegisterType<TodoModel>("org.erturk.todo", 1, 0, "TodoModel");
-    qmlRegisterUncreatableType<TodoList>("org.erturk.todo", 1, 0, "TodoList",
+    qmlRegisterType<TodoListModel>("org.erturk.todolist", 1, 0, "TodoListModel");
+    qmlRegisterUncreatableType<TodoList>("org.erturk.todolist", 1, 0, "TodoList",
                                          QStringLiteral("List should not be created in QML"));
 
     QFileInfo db_file(connectionString);
-    DbHelper dbh;
+    TodoListDBHelper dbh;
     if (db_file.exists() && db_file.isFile())
     {
         dbh.ConnectToDb();

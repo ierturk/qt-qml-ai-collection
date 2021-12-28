@@ -2,7 +2,7 @@
 
 `Qt-QML-AI` is a collection of some experimental works on AI and Qt Qml. 
 ___
-## Repo ve Dökümantasyon Adresleri ##
+## Associated Repos and Documentations ##
 | No | Repo                                     | Repo URL      | Documentation URL     |
 | :---: | :---                                  | :---:         | :---:                 |
 | 1     | Docker Development Containers         | [Repo][1]     | [Docs][2]             |
@@ -14,7 +14,12 @@ ___
 | 7     | OpenCV Contrib                        | [Repo][13]    | [Docs][14]            |
 | 8     | ONNXRunTime                           | [Repo][15]    | [Docs][16]            |
 | 10    | VS Code Remote Development            | [Repo][17]    | [Docs][18]            |
-
+___
+## Credits ##
+* [Qt Todo List][19]
+* [ZXing Cpp Barcode Library][20]
+* [CuteDetector][21]
+* [YoloV5 OnnxRunTime][22] 
 ____
 Copyright © 2021 StarGate, Inc.
 
@@ -35,7 +40,7 @@ Copyright © 2021 StarGate, Inc.
 
 [7]: https://github.com/nu-book/zxing-cpp.git
         (Lib-ZXing Repo)
-[8]: https://github.com/nu-book/zxing-cpp/raw/master/README.md
+[8]: https://github.com/nu-book/zxing-cpp/blob/master/README.md
         (Lib-ZXing Docs)
 
 [9]: https://github.com/ierturk/qt-wayland-compositor.git
@@ -50,7 +55,7 @@ Copyright © 2021 StarGate, Inc.
 
 [13]: https://github.com/opencv/opencv_contrib.git
         (OpenCV Contrib Repo)
-[14]: https://github.com/opencv/opencv_contrib/raw/4.x/README.md
+[14]: https://github.com/opencv/opencv_contrib/blob/4.x/README.md
         (OpenCV Contrib Docs)
 
 [15]: https://github.com/microsoft/onnxruntime.git
@@ -62,3 +67,12 @@ Copyright © 2021 StarGate, Inc.
         (VS Code Remote Development Repo)
 [18]: https://code.visualstudio.com/docs/remote/remote-overview
         (VS Code Remote Development Docs)
+
+[19]: https://github.com/huserman/qt-todolist
+        (Qt Todo List)
+[20]: https://github.com/nu-book/zxing-cpp
+        (ZXing Cpp Barcode Library)
+[21]: https://bitbucket.org/amahta/cutedetector/src/master/
+        (CuteDetector)
+[22]: https://github.com/itsnine/yolov5-onnxruntime
+        (YoloV5 OnnxRunTime)

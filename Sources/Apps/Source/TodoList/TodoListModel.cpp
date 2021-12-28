@@ -1,13 +1,13 @@
-#include "todomodel.h"
-#include "todo.h"
+#include "TodoListModel.h"
+#include "TodoList.h"
 
-TodoModel::TodoModel(QObject *parent)
+TodoListModel::TodoListModel(QObject *parent)
     : QAbstractListModel(parent)
     , mList(nullptr)
 {
 }
 
-int TodoModel::rowCount(const QModelIndex &parent) const
+int TodoListModel::rowCount(const QModelIndex &parent) const
 {
     // For list models only the root node (an invalid parent) should return the list's size. For all
     // other (valid) parents, rowCount() should return 0 so that it does not become a tree model.
@@ -18,7 +18,7 @@ int TodoModel::rowCount(const QModelIndex &parent) const
     return mList->items().size();
 }
 
-QVariant TodoModel::data(const QModelIndex &index, int role) const
+QVariant TodoListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || !mList)
         return QVariant();
@@ -29,8 +29,6 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
         case DoneRole:
             // QVariant class acts like a union for most common qt data types
             return QVariant(item.done);
-        case BarcodeRole:
-            return QVariant(item.barcode);
         case DescriptionRole:
             return QVariant(item.description);
         case IdRole:
@@ -42,7 +40,7 @@ QVariant TodoModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-bool TodoModel::setData(const QModelIndex &index, const QVariant &value, int role)
+bool TodoListModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     if (!mList)
         return false;
@@ -52,9 +50,6 @@ bool TodoModel::setData(const QModelIndex &index, const QVariant &value, int rol
         case DoneRole:
             // Now we convert back the QVariant by typecasting
             item.done = value.toBool();
-            break;
-        case BarcodeRole:
-            item.barcode = value.toString();
             break;
         case DescriptionRole:
             item.description = value.toString();
@@ -75,7 +70,7 @@ bool TodoModel::setData(const QModelIndex &index, const QVariant &value, int rol
     return false;
 }
 
-Qt::ItemFlags TodoModel::flags(const QModelIndex &index) const
+Qt::ItemFlags TodoListModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return Qt::NoItemFlags;
@@ -83,23 +78,22 @@ Qt::ItemFlags TodoModel::flags(const QModelIndex &index) const
     return Qt::ItemIsEditable;
 }
 
-QHash<int, QByteArray> TodoModel::roleNames() const
+QHash<int, QByteArray> TodoListModel::roleNames() const
 {
     QHash<int, QByteArray> names;
     names[DoneRole] = "done";
-    names[BarcodeRole] = "barcode";
     names[DescriptionRole] = "description";
     names[IdRole] = "id";
     names[StatusRole] = "status";
     return names;
 }
 
-TodoList *TodoModel::list() const
+TodoList *TodoListModel::list() const
 {
     return mList;
 }
 
-void TodoModel::setList(TodoList *list)
+void TodoListModel::setList(TodoList *list)
 {
     beginResetModel();
 

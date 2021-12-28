@@ -8,7 +8,7 @@ import ZXing 1.0
 import org.erturk.face 1.0
 import org.erturk.sgdet 1.0
 import org.erturk.nucleo 1.0
-import org.erturk.todo 1.0
+import org.erturk.todolist 1.0
 
 ApplicationWindow {
     visible: true

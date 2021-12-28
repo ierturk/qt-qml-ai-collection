@@ -1,6 +1,5 @@
 #include <QDebug>
-#include "todo.h"
-#include "dbhelper.h"
+#include "TodoListDBHelper.h"
 #include <QSqlRecord>
 #include <QSqlField>
 
@@ -22,7 +21,7 @@ QVector<TodoItem> TodoList::items() const
 
 void TodoList::getItems()
 {
-    DbHelper dbh;
+    TodoListDBHelper dbh;
     QSqlQueryModel* getRecords = dbh.getRecords();
     int rowCount = getRecords->rowCount();
     if (rowCount > 0)
@@ -32,9 +31,8 @@ void TodoList::getItems()
         {
             uint id = getRecords->record(i).value("id").toUInt();
             bool done = getRecords->record(i).value("done").toBool();
-            QString barcode = getRecords->record(i).value("barcode").toString();
             QString descr = getRecords->record(i).value("description").toString();
-            mItems.append({ done, barcode, descr, id, 0 });
+            mItems.append({ done, descr, id, 0 });
         }
     }
     else
@@ -81,7 +79,7 @@ void TodoList::appendItem()
 //Check on all items and remove the ones that are done
 void TodoList::removeCompletedItems()
 {
-    DbHelper dbh;
+    TodoListDBHelper dbh;
 
     for (int i = 0; i < mItems.size();)
     {
@@ -105,7 +103,7 @@ void TodoList::removeCompletedItems()
 
 void TodoList::saveItems()
 {
-    DbHelper dbh;
+    TodoListDBHelper dbh;
     for (TodoItem &item: mItems)
     {
         if (item.status == 1) //Update
@@ -120,3 +118,4 @@ void TodoList::saveItems()
     }
     getItems(); //Render
 }
+

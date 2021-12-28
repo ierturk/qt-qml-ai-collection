@@ -3,23 +3,26 @@
 #include <QSqlQueryModel>
 #include <QtDebug>
 
-#include "dbhelper.h"
+#include "TodoListDBHelper.h"
 
-DbHelper::DbHelper() {
+TodoListDBHelper::TodoListDBHelper() {
     ConnectToDb();
 }
 
-void DbHelper::ConnectToDb()
+void TodoListDBHelper::ConnectToDb()
 {
 
-    if (QSqlDatabase::contains(connectionName)) {
+    if (QSqlDatabase::contains(connectionName))
+    {
         db = QSqlDatabase::database(connectionName);
-    
-    } else {
+    }
+    else
+    {
         db = QSqlDatabase::addDatabase("QSQLITE");
     }
 
     db.setDatabaseName(connectionString);
+
 
     if (!db.open()) {
         qDebug() << "Error: connection with database failed";
@@ -28,14 +31,13 @@ void DbHelper::ConnectToDb()
     } else {
        qDebug() << "Database: connection opened";
     }
- 
+
     // Init
     QSqlQuery query(db);
 
     if (!db.tables().contains( QLatin1String("todo_list"))) {
         bool created = query.exec("CREATE TABLE IF NOT EXISTS todo_list ("
                                 "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                                "barcode VARCHAR (320), "
                                 "description VARCHAR (320), "
                                 "isdeleted BOOLEAN DEFAULT (0), "
                                 "done BOOLEAN DEFAULT (0), "
@@ -43,15 +45,16 @@ void DbHelper::ConnectToDb()
 
         qDebug() << "Database: inititialized." << created;
 
-        if(!query.exec("INSERT INTO todo_list(barcode, description) VALUES('80829010', 'Mentos CleanBreath')"))
+        if(!query.exec("INSERT INTO todo_list(description) VALUES('Wake up')"))
         qWarning() << "MainWindow::DatabasePopulate - ERROR: " << query.lastError().text();
-        if(!query.exec("INSERT INTO todo_list(barcode, description) VALUES('86918091', 'Parliament Night Blue')"))
+        if(!query.exec("INSERT INTO todo_list(description) VALUES('Have breakfast')"))
         qWarning() << "MainWindow::DatabasePopulate - ERROR: " << query.lastError().text();
     }
 
+
 }
 
-DbHelper::~DbHelper()
+TodoListDBHelper::~TodoListDBHelper()
 {
     if (db.isOpen())
     {
@@ -61,12 +64,12 @@ DbHelper::~DbHelper()
     }
 }
 
-bool DbHelper::isOpen() const
+bool TodoListDBHelper::isOpen() const
 {
     return db.isOpen();
 }
 
-void DbHelper::removeDb(const QString &conName)
+void TodoListDBHelper::removeDb(const QString &conName)
 {
     QSqlDatabase::removeDatabase(conName);
     qDebug() << "Database: connection removed";
@@ -74,26 +77,25 @@ void DbHelper::removeDb(const QString &conName)
 
 
 
-QSqlQueryModel* DbHelper::getRecords() const
+QSqlQueryModel* TodoListDBHelper::getRecords() const
 {
     QSqlQueryModel* model = new QSqlQueryModel;
-    QString q = "SELECT id, done, barcode, description FROM todo_list WHERE isdeleted = 0";
+    QString q = "SELECT id, done, description FROM todo_list WHERE isdeleted = 0";
     model->setQuery(q);
     return model;
 }
 
-bool DbHelper::updateRecords(const TodoItem &item)
+bool TodoListDBHelper::updateRecords(const TodoItem &item)
 {
     bool success = false;
 
     if (!item.description.isEmpty())
     {
         QSqlQuery query(db);
-        QString strQuery = "UPDATE todo_list SET done = :done, barcode = :barcode, description = :description, addedtime = datetime(CURRENT_TIMESTAMP, 'localtime') "
+        QString strQuery = "UPDATE todo_list SET done = :done, description = :description, addedtime = datetime(CURRENT_TIMESTAMP, 'localtime') "
                            "WHERE id = :id";
         query.prepare(strQuery);
         query.bindValue(":done", QString::number(item.done));
-        query.bindValue(":barcode", item.barcode);
         query.bindValue(":description", item.description);
         query.bindValue(":id", item.id);
 
@@ -114,17 +116,16 @@ bool DbHelper::updateRecords(const TodoItem &item)
     return success;
 }
 
-bool DbHelper::insertRecords(const TodoItem& item)
+bool TodoListDBHelper::insertRecords(const TodoItem& item)
 {
     bool success = false;
 
     if (!item.description.isEmpty())
     {
         QSqlQuery queryAdd;
-        queryAdd.prepare("INSERT INTO todo_list(done, barcode, description, addedtime) "
-                         "VALUES (:done, :barcode, :description, datetime(CURRENT_TIMESTAMP, 'localtime'))");
+        queryAdd.prepare("INSERT INTO todo_list(done, description, addedtime) "
+                         "VALUES (:done, :description, datetime(CURRENT_TIMESTAMP, 'localtime'))");
         queryAdd.bindValue(":done", item.done);
-        queryAdd.bindValue(":barcode", item.barcode);
         queryAdd.bindValue(":description", item.description);
 
         if (queryAdd.exec())
@@ -142,14 +143,10 @@ bool DbHelper::insertRecords(const TodoItem& item)
         qDebug() << "Insertion failed: description cannot be empty";
     }
 
-    QSqlQuery query(db);
-    QString strQuery = "UPDATE todo_list SET isdeleted = 1, addedtime = datetime(CURRENT_TIMESTAMP, 'localtime') "
-                       "WHERE id = :id";
-
     return success;
 }
 
-bool DbHelper::deleteRecordByID(const quint32 itemId)
+bool TodoListDBHelper::deleteRecordByID(const quint32 itemId)
 {
     bool success = false;
 

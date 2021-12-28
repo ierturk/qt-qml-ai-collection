@@ -44,7 +44,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     # Main App includes
     Source/Nucleo
 
-    Source/Todo
+    Source/TodoList
 )
 
 target_sources(${PROJECT_NAME} PRIVATE
@@ -65,9 +65,9 @@ target_sources(${PROJECT_NAME} PRIVATE
   ../External/liberpc-app/liberpc_ext/transports/erpc_serial_transport.cpp
 
   # Shooping Model
-  Source/Todo/dbhelper.cpp
-  Source/Todo/todo.cpp
-  Source/Todo/todomodel.cpp
+  Source/TodoList/TodoListDBHelper.cpp
+  Source/TodoList/TodoList.cpp
+  Source/TodoList/TodoListModel.cpp
 )
 
 target_compile_definitions(${PROJECT_NAME}

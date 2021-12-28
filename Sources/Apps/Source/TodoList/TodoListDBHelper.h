@@ -1,22 +1,22 @@
-#ifndef DBHELPER_H
-#define DBHELPER_H
+#ifndef TODOLISTDBHELPER_H
+#define TODOLISTDBHELPER_H
 
 #include <QObject>
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
 
-#include "todo.h"
+#include "TodoList.h"
 
 static const QString connectionString = "/workspace/run/sqlite/db/todolist.db";
 static const QString connectionName = "TodoListDBConnection";
 
-class DbHelper : public QObject
+class TodoListDBHelper : public QObject
 {
     Q_OBJECT
 
 public:
-    DbHelper();
-    ~DbHelper();
+    TodoListDBHelper();
+    ~TodoListDBHelper();
     void ConnectToDb();
     bool isOpen() const;
     void removeDb(const QString &conName);
@@ -54,4 +54,4 @@ private:
 
 };
 
-#endif // DBHELPER_H
+#endif // TODOLISTDBHELPER_H

@@ -1,12 +1,12 @@
-#ifndef TODO_H
-#define TODO_H
+#ifndef TODOLIST_H
+#define TODOLIST_H
 
 #include <QObject>
 #include <QVector>
 
-struct TodoItem {
+struct TodoItem
+{
     bool done;
-    QString barcode;
     QString description;
     quint32 id;
     quint8 status; // Default:0, Changed:1, New:2
@@ -40,4 +40,4 @@ private:
 
 };
 
-#endif // TODO_H
+#endif // TODOLIST_H
