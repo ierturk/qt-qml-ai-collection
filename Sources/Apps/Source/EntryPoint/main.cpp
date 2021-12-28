@@ -13,7 +13,7 @@
 #include "nucleo.h"
 #include "barcode.h"
 #include "face.h"
-#include "hand.h"
+#include "SGDet.h"
 
 #include "todo.h"
 #include "todomodel.h"
@@ -56,7 +56,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<QCvDetectFilter>("org.erturk.face", 1, 0, "FaceDetectFilter");
     qRegisterMetaType<QList<QRect>>("QList<QRect>");
-    qmlRegisterType<HandDetectFilter>("org.erturk.hand", 1, 0, "HandDetectFilter");
+    qmlRegisterType<SGDetFilter>("org.erturk.sgdet", 1, 0, "SGDetFilter");
     qmlRegisterType<Nucleo>("org.erturk.nucleo", 1, 0, "Nucleo");
 
     QGuiApplication app(argc, argv);

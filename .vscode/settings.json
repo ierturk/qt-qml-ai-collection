@@ -81,6 +81,9 @@
         "variant": "cpp",
         "__nullptr": "cpp",
         "qjsonobject": "cpp",
-        "qdebug": "cpp"
+        "qdebug": "cpp",
+        "strstream": "cpp",
+        "ranges": "cpp",
+        "cfenv": "cpp"
     },
 }

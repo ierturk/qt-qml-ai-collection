@@ -6,9 +6,8 @@ import QtQuick.Shapes 1.15
 import QtMultimedia 5.15
 import ZXing 1.0
 import org.erturk.face 1.0
-import org.erturk.hand 1.0
+import org.erturk.sgdet 1.0
 import org.erturk.nucleo 1.0
-
 import org.erturk.todo 1.0
 
 ApplicationWindow {
@@ -16,7 +15,7 @@ ApplicationWindow {
     width: 1280
     height: 800
     title: Qt.application.name
-    flags: Qt.FramelessWindowHint
+    // flags: Qt.FramelessWindowHint
 
 
     property var nullPoints: [Qt.point(0,0), Qt.point(0,0), Qt.point(0,0), Qt.point(0,0)]
@@ -51,8 +50,8 @@ ApplicationWindow {
         }
     }
 
-    HandDetectFilter {
-        id: handDetectFilter
+    SGDetFilter {
+        id: sgDetFilter
         onObjectDetected: {
         }
     }
@@ -164,10 +163,10 @@ ApplicationWindow {
                         Layout.fillHeight: true
                         Layout.fillWidth: true
                         // filters: [zxingFilter, faceDetectFilter]
-                        // filters: [zxingFilter, faceDetectFilter, handDetectFilter]
-                        // filters: [zxingFilter, handDetectFilter]
-                        // filters: [handDetectFilter]
-                        filters: [faceDetectFilter]
+                        // filters: [zxingFilter, faceDetectFilter, sgDetFilter]
+                        // filters: [zxingFilter, sgDetFilter]
+                        filters: [sgDetFilter]
+                        // filters: [faceDetectFilter]
                         source: video_cam00
                         autoOrientation: true
 

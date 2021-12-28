@@ -30,7 +30,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   Source/Barcode
   Source/EntryPoint
   Source/Face
-  Source/Hand
+  Source/SGDet
   Source/OrtNet
   ${OpenCV_INCLUDE_DIRS}
   ${onnxruntime_INCLUDE_DIRS}
@@ -51,8 +51,9 @@ target_sources(${PROJECT_NAME} PRIVATE
   Source/EntryPoint/main.cpp
   Source/Barcode/barcode.h
   Source/Face/face.cpp
-  Source/Hand/hand.cpp
+  Source/SGDet/SGDet.cpp
   Source/OrtNet/OrtNet.cpp
+  Source/OrtNet/OrtUtils.cpp
   Resource/qml.qrc
 
   # eRPC APP sources

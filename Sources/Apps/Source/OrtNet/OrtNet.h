@@ -1,69 +1,50 @@
+#ifndef ORTNET_H
+#define ORTNET_H
+
 #pragma once
 #include <iostream>
 #include <iomanip>
 #include <chrono>
 #include <cassert>
-#include "onnxruntime_cxx_api.h"
-#include <opencv2/opencv.hpp>
-#include <opencv2/dnn.hpp>
 #include <QImage>
 
 #include <string>
 #include <fstream>
+#include <utility>
 
-struct NetIOs {
-  cv::Mat frame;
-  Ort::Value input_tensor = Ort::Value(nullptr);
-  std::vector<Ort::Value> output_tensor = std::vector<Ort::Value>();
-};
+#include "onnxruntime_cxx_api.h"
+#include <opencv2/opencv.hpp>
+#include <opencv2/dnn.hpp>
+#include "OrtUtils.h"
 
-class OrtNet {
-
+class OrtNet
+{
 public:
-	OrtNet();
-	~OrtNet();
+    explicit OrtNet(std::nullptr_t) {};
+    OrtNet(const std::string& modelPath,
+                 const bool& isGPU,
+                 const cv::Size& inputSize);
 
-
-    void Init(const char* model_path, const char* class_path);
-
-    void setInputTensor(QImage& image);
-    void forward();
-    QImage getProcessedFrame();
-
-    void postprocess(cv::Mat& frame);
+    std::vector<Detection> detect(cv::Mat &image, const float& confThreshold, const float& iouThreshold);
 
 private:
-	// Ort Environment
-    Ort::Env env = Ort::Env(nullptr);
-	Ort::Session session = Ort::Session(nullptr);
-	Ort::SessionOptions session_options;
-    Ort::AllocatorWithDefaultOptions allocator;
-    Ort::MemoryInfo allocator_info = Ort::MemoryInfo::CreateCpu(OrtArenaAllocator, OrtMemTypeDefault);
+    Ort::Env env{nullptr};
+    Ort::SessionOptions sessionOptions{nullptr};
+    Ort::Session session{nullptr};
 
+    void preprocessing(cv::Mat &image, float*& blob, std::vector<int64_t>& inputTensorShape);
+    std::vector<Detection> postprocessing(const cv::Size& resizedImageShape,
+                                          const cv::Size& originalImageShape,
+                                          std::vector<Ort::Value>& outputTensors,
+                                          const float& confThreshold, const float& iouThreshold);
 
-    // Model
-	// Inputs
-	std::vector<const char*> input_node_names = std::vector<const char*>();
-	std::vector<size_t> input_node_sizes = std::vector<size_t>();
-	std::vector<std::vector<int64_t>> input_node_dims = std::vector<std::vector<int64_t>>();
+    static void getBestClassInfo(std::vector<float>::iterator it, const int& numClasses,
+                                 float& bestConf, int& bestClassId);
 
-	// Outputs
-	std::vector<const char*>output_node_names = std::vector<const char*>();
-	std::vector<size_t> output_node_sizes = std::vector<size_t>();
-	std::vector<std::vector<int64_t>> output_node_dims = std::vector<std::vector<int64_t>>();
-
-
-    // Parameters for SSD MobileNet (fixed)
-    const float scale = 0.0078125f;
-    const cv::Scalar mean = cv::Scalar(128.0f, 128.0f, 128.0f);
-    const cv::Size sz = cv::Size(300, 300);
-    const bool swapRB = true;
-
-    float confThreshold = 0.85f;
-    float nmsThreshold = 0.40f;
-    std::vector<std::string> classes;
-
-    NetIOs* netIOs = new NetIOs();
-
-    void drawPred(cv::Mat& frame, int classId, float conf, int left, int top, int right, int bottom);
+    std::vector<const char*> inputNames;
+    std::vector<const char*> outputNames;
+    bool isDynamicInputShape{};
+    cv::Size2f inputImageShape;
 };
+
+#endif // ORTNET_H
