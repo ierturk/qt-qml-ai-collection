@@ -1,6 +1,6 @@
 # Qt-QML-AI #
 
-`Qt-QML-AI` is a collection of some experimental works on AI and Qt Qml. 
+`Qt-QML-AI` is a collection of some experimental works on `AI`, `Image Processing`, `Qt Qml` and `eRPC`. 
 ___
 ## Associated Repos and Documentations ##
 | No | Repo                                     | Repo URL      | Documentation URL     |
