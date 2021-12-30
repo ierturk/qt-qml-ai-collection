@@ -1,7 +1,7 @@
 # Qt-QML-AI #
 
 `Qt-QML-AI` is a collection of some experimental works on `AI`, `Image Processing`, `Qt Qml` and `eRPC`. 
-## How to Use Thsi Repo ##
+## How to Use This Repo ##
 It is simple as follow
 ### Requirements ###
 - Any `Linux` Distribution (tested on `Debian 11`) with `Wayland Display Manager`
