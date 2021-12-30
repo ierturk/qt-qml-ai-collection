@@ -1,6 +1,21 @@
 # Qt-QML-AI #
 
 `Qt-QML-AI` is a collection of some experimental works on `AI`, `Image Processing`, `Qt Qml` and `eRPC`. 
+## How to Use Thsi Repo ##
+It is simple as follow
+### Requirements ###
+- Any `Linux` Distribution (tested on `Debian 11`) with `Wayland Display Manager`
+- `Docker` daemon
+- `VS Code` with `Remote Container` extension. Or alternatively it can be used `Remote SHH`.   
+### Run as follow ###
+- Just clone the repo as follow.
+```
+$ git clone https://github.com/ierturk/qt-qml-ai-collection.git
+```
+- Just open the cloned folder in `VS Code`.
+- Reopen in the development container.
+- Build with `Cmake`.
+- Run any target built by `Cmake`.
 
 ## Associated Repos and Documentations ##
 | No | Repo                                     | Repo URL      | Documentation URL     |
