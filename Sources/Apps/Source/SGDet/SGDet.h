@@ -37,8 +37,8 @@ private:
 
     // Model Info 
     bool isGPU = false;
-    const std::string classNamesPath = "/workspace/Qt/qt-qml-ai/Sources/Assets/YoloV5/coco.names";
-    const std::string modelPath = "/workspace/Qt/qt-qml-ai/Sources/Assets/YoloV5/yolov5n.onnx";  
+    const std::string classNamesPath = "/workspace/Sources/Assets/YoloV5/coco.names";
+    const std::string modelPath = "/workspace/Sources/Assets/YoloV5/yolov5n.onnx";  
     const cv::Size input_image_size = cv::Size(640, 640);
 
     // Store the list of classe name

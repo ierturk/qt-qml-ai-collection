@@ -1,0 +1,40 @@
+{
+	"name": "C++",
+	"build": {
+		"dockerfile": "Dockerfile",
+	},
+	"runArgs": ["--cap-add=SYS_PTRACE", "--security-opt", "seccomp=unconfined",
+					"--env-file",".devcontainer/devcontainer.env",
+					"--privileged"],
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"ms-vscode.cpptools",
+		"ms-vscode.cmake-tools"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "gcc -v",
+
+	"remoteUser": "ierturk",
+	"features": {
+		"sshd": "latest"
+	},
+
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+	"workspaceFolder": "/workspace",
+
+	"mounts": [
+		"source=${localEnv:HOME}/.Data/Work/PROJs/run/sqlite/db,target=/run/sqlite/db,type=bind,consistency=cached",
+		"source=/tmp,target=/tmp,type=bind,consistency=cached",
+		"source=/dev,target=/dev,type=bind,consistency=cached",
+		"source=/run/udev,target=/run/udev,type=bind,consistency=cached",
+		"source=/run/user/1000,target=/run/user/1000,type=bind,consistency=cached"
+	]
+}

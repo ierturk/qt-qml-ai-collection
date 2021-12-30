@@ -1,13 +1,15 @@
 {
     "cmake.configureOnOpen": false,
     // "cmake.generator": "Unix Makefiles",
-	"terminal.integrated.env.linux": {
+	/*
+    "terminal.integrated.env.linux": {
         "WAYLAND_USER": "ierturk",
         "XDG_RUNTIME_DIR":"/run/user/1000",
         "WAYLAND_DISPLAY": "wayland-0",
         "DISPLAY": ":0",
         "QT_QPA_PLATFORM": "wayland",
     },
+    */
     "files.associations": {
         "iostream": "cpp",
         "*.ipp": "cpp",

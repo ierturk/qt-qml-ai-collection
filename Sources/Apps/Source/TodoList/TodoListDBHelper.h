@@ -7,7 +7,7 @@
 
 #include "TodoList.h"
 
-static const QString connectionString = "/workspace/run/sqlite/db/todolist.db";
+static const QString connectionString = "/run/sqlite/db/todolist.db";
 static const QString connectionName = "TodoListDBConnection";
 
 class TodoListDBHelper : public QObject
