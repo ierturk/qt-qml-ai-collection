@@ -11,6 +11,7 @@ It is simple as follow
 - Just clone the repo as follow.
 ```
 $ git clone https://github.com/ierturk/qt-qml-ai-collection.git
+$ git submodule update --init
 ```
 - Just open the cloned folder in `VS Code`.
 - Reopen in the development container.
